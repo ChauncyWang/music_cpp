@@ -4,10 +4,10 @@
 
 #include "WButton.h"
 
-WButton::WButton(QWidget *parent):QLabel(parent) {
+WButton::WButton(QWidget *parent) : QLabel(parent) {
 
 }
 
 void WButton::mousePressEvent(QMouseEvent *ev) {
-    emit clicked();
+    emit press();
 }

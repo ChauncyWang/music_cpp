@@ -8,16 +8,17 @@
 
 #include <QtWidgets/QLabel>
 
-class WButton: public QLabel {
+class WButton : public QLabel {
 Q_OBJECT
 
 public:
-    WButton(QWidget *parent=NULL);
+    WButton(QWidget *parent = NULL);
 
 public slots:
 
 signals:
-    void clicked();
+
+    void press();
 
 protected:
     void mousePressEvent(QMouseEvent *ev);

@@ -5,18 +5,18 @@
 #include <QtGui/QPainter>
 #include "ProgressBar.h"
 
-ProgressBar::ProgressBar(QWidget *parent):QFrame(parent) {
+ProgressBar::ProgressBar(QWidget *parent) : QFrame(parent) {
     setMouseTracking(true);
     int color;
-    sscanf("A0FF0066","%x",&color);
+    sscanf("A0FF0066", "%x", &color);
     in_color = QColor::fromRgba((QRgb) color);
 }
 
 void ProgressBar::updateRate(QMouseEvent *event) {
     int x = event->x();
     if (x > out_radius && loaded) {
-        if (x < width()-out_radius) {
-            rate = (x - out_radius) * 1.0 /(width() - 2 * out_radius);
+        if (x < width() - out_radius) {
+            rate = (x - out_radius) * 1.0 / (width() - 2 * out_radius);
             emit rateChanged(rate);
             update();
         }
@@ -32,7 +32,7 @@ void ProgressBar::paintEvent(QPaintEvent *event) {
     //平滑绘制防锯齿
     painter.setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing);
 
-    QColor c1,c2;
+    QColor c1, c2;
     if (loaded) {
         c1 = load_color;
         c2 = in_color;
@@ -44,12 +44,12 @@ void ProgressBar::paintEvent(QPaintEvent *event) {
     painter.setPen(Qt::NoPen);
     //绘制进度条背景
     painter.setBrush(c1);
-    QRectF rect = QRectF(d_r,d_r,w + 2 * in_radius,2 * in_radius);
-    painter.drawRoundedRect(rect,in_radius,in_radius);
+    QRectF rect = QRectF(d_r, d_r, w + 2 * in_radius, 2 * in_radius);
+    painter.drawRoundedRect(rect, in_radius, in_radius);
     // 绘制进度条
     painter.setBrush(c2);
-    rect = QRectF(d_r,d_r,w * rate + 2 * in_radius,2*in_radius);
-    painter.drawRoundedRect(rect,in_radius,in_radius);
+    rect = QRectF(d_r, d_r, w * rate + 2 * in_radius, 2 * in_radius);
+    painter.drawRoundedRect(rect, in_radius, in_radius);
 
     if (loaded) {
         // 绘制进度条节点外圆
