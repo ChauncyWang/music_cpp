@@ -4,7 +4,7 @@
 
 #include "TitleBar.h"
 #include "Awesome.h"
-#include "iostream"
+#include <iostream>
 
 using namespace std;
 
@@ -13,9 +13,10 @@ using namespace std;
  * @param parent 父控件
  */
 TitleBar::TitleBar(QWidget *parent) : QFrame(parent) {
-    char qss[200];
-    sprintf(qss, awesome_qss, 20, "80FF00FF");
+    QString qss = awesome(20);
+    setStyleSheet(QString("TitleBar{background-color:#")+fore_color+";}");
 
+    cout << qss.toStdString() << endl;
     // 搜索框
     input = new QLineEdit(this);
     input->setGeometry(20, 5, 150, 30);
@@ -43,19 +44,21 @@ TitleBar::TitleBar(QWidget *parent) : QFrame(parent) {
     connect(btn_close, SIGNAL(press()), this, SIGNAL(quit()));
     connect(btn_min, SIGNAL(press()), this, SIGNAL(minimized()));
     connect(btn_max, SIGNAL(press()), this, SIGNAL(maximized()));
-    connect(btn_search,SIGNAL(press()),this,SLOT(search()));
+    connect(btn_search, SIGNAL(press()), this, SLOT(search()));
 }
 
 void TitleBar::mousePressEvent(QMouseEvent *event) {
     QWidget::mousePressEvent(event);
     clicked = true;
     pos = event->pos();
+    setCursor(Qt::PointingHandCursor);
 }
 
 
 void TitleBar::mouseReleaseEvent(QMouseEvent *event) {
     QWidget::mouseReleaseEvent(event);
     clicked = false;
+    setCursor(Qt::CustomCursor);
 }
 
 void TitleBar::mouseMoveEvent(QMouseEvent *event) {
@@ -78,7 +81,7 @@ void TitleBar::resizeEvent(QResizeEvent *event) {
 
 void TitleBar::keyPressEvent(QKeyEvent *event) {
     QWidget::keyPressEvent(event);
-    if (event -> key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
+    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
         search();
     }
 }

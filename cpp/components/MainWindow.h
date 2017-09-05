@@ -9,15 +9,20 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QApplication>
 #include "TitleBar.h"
+#include "PlayBar.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
 public:
     MainWindow(QApplication *app);
 
+protected:
+    void paintEvent(QPaintEvent *event) override;
+
 private:
     QApplication *app;
     TitleBar *titleBar;
+    PlayBar *playBar;
 };
 
 

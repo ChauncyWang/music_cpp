@@ -1,9 +1,41 @@
 //
-// Created by hy on 17-9-4.
+// Created by chava on 17-9-5.
 //
 
-#include <QtGui/QPainter>
-#include "ProgressBar.h"
+#include "PlayBar.h"
+#include "Awesome.h"
+#include <QPainter>
+
+
+PlayBar::PlayBar(QWidget *parent) : QFrame(parent) {
+    setStyleSheet("PlayBar {background-color:#80000000;}");
+
+    btn_pre = new WButton(this);
+    btn_pre->setText(icon_step_backward);
+    btn_pre->setAlignment(Qt::AlignCenter);
+    btn_pre->setStyleSheet(awesomeCircle(20, 20));
+    btn_pre->setGeometry(20, 10, 40, 40);
+
+    btn_play = new WButton(this);
+    btn_play->setText(icon_play);
+    btn_play->setAlignment(Qt::AlignCenter);
+    btn_play->setStyleSheet(awesomeCircle(30, 30,4));
+    btn_play->setGeometry(70, 0, 60, 60);
+
+    btn_next = new WButton(this);
+    btn_next->setText(icon_step_forward);
+    btn_next->setAlignment(Qt::AlignCenter);
+    btn_next->setStyleSheet(awesomeCircle(20, 20));
+    btn_next->setGeometry(140, 10, 40, 40);
+
+    progressBar = new ProgressBar(this);
+    progressBar->setGeometry(300,40,500,20);
+}
+
+void PlayBar::resizeEvent(QResizeEvent *event) {
+    QWidget::resizeEvent(event);
+
+}
 
 ProgressBar::ProgressBar(QWidget *parent) : QFrame(parent) {
     setMouseTracking(true);

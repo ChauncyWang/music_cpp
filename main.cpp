@@ -7,9 +7,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
 #include <QtGui/QFontDatabase>
-#include <cpp/components/ProgressBar.h>
-#include <cpp/components/TitleBar.h>
-#include <cpp/components/MainWindow.h>
+#include "cpp/components/MainWindow.h"
 // https://www.oschina.net/translate/how-to-write-vim-plugins-with-python
 using namespace std;
 

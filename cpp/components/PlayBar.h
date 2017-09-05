@@ -1,13 +1,15 @@
 //
-// Created by hy on 17-9-4.
+// Created by chava on 17-9-5.
 //
 
-#ifndef MUSIC_PROGRESSBAR_H
-#define MUSIC_PROGRESSBAR_H
+#ifndef MUSIC_PLAYBAR_H
+#define MUSIC_PLAYBAR_H
 
 
 #include <QtWidgets/QFrame>
 #include <QMouseEvent>
+
+#include "WButton.h"
 
 /**
  * 播放进度条
@@ -63,4 +65,26 @@ private:
 };
 
 
-#endif //MUSIC_PROGRESSBAR_H
+class PlayBar : public QFrame {
+Q_OBJECT
+
+public:
+    PlayBar(QWidget *parent = NULL);
+
+public slots:
+signals:
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
+private:
+
+    WButton *btn_pre;
+    WButton *btn_play;
+    WButton *btn_next;
+
+    ProgressBar* progressBar;
+};
+
+
+#endif //MUSIC_PLAYBAR_H
